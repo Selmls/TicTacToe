@@ -1,71 +1,86 @@
 c = []
-xreiksmes = []
-lista = "9|8|7\n6|5|4\n3|2|1\n"
+listas = "9|8|7\n6|5|4\n3|2|1\n"
 
 
-def pirmas():
-    x = input("enter number")
+def pirmaskryziukai():
     listas = "9|8|7\n6|5|4\n3|2|1\n"
+    print(listas)
+    x = input("Enter number: ")
     if x in listas:
-        xreiksmes.append(x)
         listas = listas.replace(x, "X")
         print(listas)
         return listas
-    elif x not in listas:
+    if x not in listas:
         print(listas)
         print("Wrong value")
+        pirmaskryziukai()
+
+
+def pirmasnuliukai():
+    listas = "9|8|7\n6|5|4\n3|2|1\n"
+    print(listas)
+    x = input("Enter number: ")
+    if x in listas:
+        listas = listas.replace(x, "0")
+        print(listas)
+        return listas
+    if x not in listas:
+        print(listas)
+        print("Wrong value")
+        pirmasnuliukai()
 
 
 def antras(listas):
-    o = input("enter number")
-    if o in listas:
-        listas = listas.replace(o, "0")
-        print(listas)
-        return listas
-    elif o not in listas:
+    try:
+        o = input("Enter number: ")
+        if o in listas:
+            listas = listas.replace(o, "0")
+            print(listas)
+            return listas
+    except o not in listas:
         print(listas)
         print("Wrong value")
+
 
 
 def trecias(listas):
-    x = input("enter number")
+    x = input("Enter number: ")
     if x in listas:
-        xreiksmes.append(x)
         listas = listas.replace(x, "X")
         print(listas)
         return listas
-    elif x not in listas:
+    if x not in listas:
         print(listas)
         print("Wrong value")
+        trecias(listas)
 
 
 def check_win(listas):
     lines = listas.split('\n')
-
-    # Check rows
     for line in lines:
-        if 'XXX' in line:
-            return print('X won')
-        elif '000' in line:
-            return print('0 won')
+        if line == "X|X|X":
+            print('X won')
+            return True
+        elif line == "0|0|0":
+            print('0 won')
+            return True
 
-    # Check columns
     for col in range(len(lines[0])):
         column = ''.join(row[col] for row in lines if col < len(row))
         if 'XXX' in column:
-            return print('X won')
+            print("X Won")
+            return True
         elif '000' in column:
-            return print('0 won')
+            print("O Won")
+            return True
 
-    # Check diagonals
-    diagonal1 = ''.join(lines[i][i] for i in range(len(lines)) if i < len(lines[i]))
-    diagonal2 = ''.join(lines[i][len(lines) - 1 - i] for i in range(len(lines)) if len(lines[i]) > len(lines) - 1 - i)
+    if listas[0] == "X" and listas[8] == "X" and listas[16] == "X" or listas[4] == "X" and listas[8] == "X" and listas[12] == "X":
+        print("X won")
+        return True
 
-    if 'XXX' in diagonal1 or 'XXX' in diagonal2:
-        return print('X won')
-    elif '000' in diagonal1 or '000' in diagonal2:
-        return print('0 won')
+    if listas[0] == "0" and listas[8] == "0" and listas[16] == "0" or listas[4] == "0" and listas[8] == "0" and listas[12] == "0":
+        print("0 won")
+        return True
 
-
-
-
+    else:
+        print("Draw")
