@@ -52,7 +52,6 @@ def trecias(listas):
     if x not in listas:
         print(listas)
         print("Wrong value")
-        trecias(listas)
 
 
 def check_win(listas):
@@ -82,5 +81,13 @@ def check_win(listas):
         print("0 won")
         return True
 
-    else:
-        print("Draw")
+def check_draw(listas):
+    b = 0
+    for a in listas:
+        if a != "X" and a != "0":
+            b += 1
+    if b == 9:
+        return True
+
+
+
